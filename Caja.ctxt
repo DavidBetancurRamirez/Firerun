@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Caja
+comment1.params=rotacion
+comment1.target=Caja(int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ abrir()
+comment4.params=
+comment4.target=boolean\ isAbierto()
+comment5.params=
+comment5.target=void\ setAbierto()
+numComments=6

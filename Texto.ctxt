@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Texto
+comment1.params=texto\ tama\u00F1o
+comment1.target=Texto(java.lang.String,\ int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=java.lang.String\ getTexto()
+comment4.params=texto
+comment4.target=void\ setTexto(java.lang.String)
+numComments=5
