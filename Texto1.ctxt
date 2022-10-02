@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Texto1
+comment1.params=texto\ tama\u00F1o\ extra
+comment1.target=Texto1(java.lang.String,\ int,\ java.lang.String)
+comment2.params=texto\ tama\u00F1o
+comment2.target=Texto1(java.lang.String,\ int)
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=java.lang.String\ getTexto()
+comment5.params=texto
+comment5.target=void\ setTexto(java.lang.String)
+comment6.params=
+comment6.target=java.lang.String\ getExtra()
+comment7.params=extra
+comment7.target=void\ setExtra(java.lang.String)
+numComments=8

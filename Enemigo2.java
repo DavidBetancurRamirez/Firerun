@@ -1,19 +1,15 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class Enemigo2 here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Enemigo2 extends Enemigo
 {
-    /**
-     * Act - do whatever the Enemigo2 wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    private GifImage gifDerecha = new GifImage("perro-derecha-v4.gif");
+    private GifImage gifIzquierda = new GifImage("perro-izquierda-v4.gif");
+    
+    public void act() {
+        moverse();
+    }
+    
+    public void moverse() {
+        if (movimiento) setImage(gifDerecha.getCurrentImage());
     }
 }

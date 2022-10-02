@@ -21,9 +21,8 @@ public class Puerta extends Objeto
     }
     
     public void cambiarImagen() {
-        if (getImage() == ultimaImagen) {
-            gifAbrir.pause();
-        } else setImage(gifAbrir.getCurrentImage());
+        if (getImage() == ultimaImagen) gifAbrir.pause();
+        else setImage(gifAbrir.getCurrentImage());
         
         if (fuego) {
             if (abierto) setImage(new GreenfootImage("Puerta-lava-abierta-v1.png"));

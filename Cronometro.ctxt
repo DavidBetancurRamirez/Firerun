@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Cronometro
+comment1.params=texto\ tama\u00F1o\ tiempoInicial\ aumentar
+comment1.target=Cronometro(java.lang.String,\ int,\ long,\ boolean)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=tiempo
+comment3.target=void\ aumentarTiempo(int)
+comment4.params=tiempo
+comment4.target=void\ disminuirTiempo(int)
+comment5.params=
+comment5.target=int\ getSegundos()
+comment6.params=segundos
+comment6.target=void\ setSegundos(int)
+numComments=7

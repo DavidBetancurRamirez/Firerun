@@ -2,8 +2,14 @@ import greenfoot.*;
 
 public class Enemigo1 extends Enemigo
 {
-    public void act()
-    {
-        // Add your action code here.
+    private GifImage gifArriba = new GifImage("monstruo1-arriba-v2.gif");
+    private GifImage gifAbajo = new GifImage("monstruo1-abajo-v2.gif");
+    
+    public void act() {
+        moverse();
+    }
+    
+    public void moverse() {
+        if (movimiento) setImage(gifAbajo.getCurrentImage());
     }
 }
