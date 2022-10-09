@@ -78,22 +78,23 @@ public class Mapa1 extends World
         addObject(new Caja("1", 0), 650, 520);
         
         // Enemigos
-        addObject(new Enemigo2(), 50, 40);
-        addObject(new Enemigo1(), 550, 50);
-        addObject(new Enemigo2(), 50, 540);
-        addObject(new Enemigo1(), 750, 550);
+        int[] posicion;
+        addObject(new Enemigo1(posicion=new int[]{50,50},posicion=new int[]{50,150},posicion=new int[]{350,150},posicion=new int[]{350,50},1), 50, 50);
+        addObject(new Enemigo2(550,50,false), 550, 40);
+        addObject(new Enemigo2(50,350,true), 50, 540);
+        addObject(new Enemigo1(posicion=new int[]{750,550},posicion=new int[]{550,550},false), 750, 550);
         
         // Zona informacion
         addObject(new Texto1("Tiempo:",sizeInfo), 900, 20);
+        tiempoLava = new Cronometro("Lava: 20",sizeInfo,tiempoInicial,false);
+        tiempoLava.setSegundos(20);
         cronometro = new Cronometro("00:00",sizeInfo,tiempoInicial,true);
+        addObject(tiempoLava, 900, 170);
         addObject(cronometro, 900, 50);
         informacion.add(new Texto1("Balas:",sizeInfo,"3"));
         addObject(informacion.get(0), 900, 90);
         informacion.add(new Texto1("Bombas:",sizeInfo,"1"));
         addObject(informacion.get(1), 900, 130);
-        tiempoLava = new Cronometro("Lava: 20",sizeInfo,tiempoInicial,false);
-        tiempoLava.setSegundos(20);
-        addObject(tiempoLava, 900, 170);
         
         addObject(new Texto1("Codigos",sizeInfo), 900, 220);
         int anterior = 255;

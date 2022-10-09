@@ -19,6 +19,6 @@ public class Codigo extends Texto2
     }
     public void setCodigo(String codigo, int puerta) {
         this.codigo = codigo;
-        setTexto("codigo puerta"+puerta+": "+codigo);
+        setTexto("Codigo puerta"+puerta+": "+codigo);
     }
 }

@@ -3,5 +3,5 @@ comment0.target=Enemigo
 comment1.params=
 comment1.target=void\ act()
 comment2.params=
-comment2.target=void\ moverse()
+comment2.target=void\ validarColision()
 numComments=3

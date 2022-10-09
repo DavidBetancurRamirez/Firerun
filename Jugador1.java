@@ -61,6 +61,12 @@ public class Jugador1 extends Jugador
                     mapa1.setCodigo(caja.getCodigo(), Integer.parseInt(caja.getPuerta()));
                 }
             }
+            
+            if (getIntersectingObjects(Municion.class).size() > 0) {
+                Municion municion = (Municion)getIntersectingObjects(Municion.class).get(0);
+                
+                municion.obtenerMunicion(mapa1);
+            }
             canFireE = false;
         } else if (!Greenfoot.isKeyDown("q")) {
             canFireE = true;

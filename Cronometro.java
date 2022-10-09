@@ -4,7 +4,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Cronometro extends Texto1
 {
-    protected int miliSegundos = 0, segundos = 0, minutos = 0, tiempoLava = 10, ultimoSegundo, duracionMilise, duracionSe;
+    protected int miliSegundos = 0, segundos = 0, minutos = 0, tiempoLava = 20, ultimoSegundo, duracionMilise, duracionSe;
     protected long tiempoInicial, tiempoTranscurrido;
     protected boolean bandera = true;
     protected boolean aumentar;
@@ -18,13 +18,12 @@ public class Cronometro extends Texto1
     
     public void act()
     {
+        tiempoTranscurrido = System.currentTimeMillis();
         if(aumentar) {
-            tiempoTranscurrido = System.currentTimeMillis();
             duracionMilise = (int)(tiempoTranscurrido - tiempoInicial);
             duracionSe = duracionMilise / 1000;
             this.aumentarTiempo(duracionSe);
         } else {
-            tiempoTranscurrido = System.currentTimeMillis();
             duracionMilise = (int)(tiempoInicial - tiempoTranscurrido);
             duracionSe = duracionMilise / 1000;
             this.disminuirTiempo(duracionSe+tiempoLava);

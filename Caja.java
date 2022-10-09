@@ -21,8 +21,8 @@ public class Caja extends Objeto
     public void act()
     {
         if(abierto) {
-            setImage(gifAbrir.getCurrentImage());
             if (getImage() == ultimaImagen) gifAbrir.pause();
+            setImage(gifAbrir.getCurrentImage());
         } else {
            setImage(cajaCerrada);
         }        
@@ -37,8 +37,7 @@ public class Caja extends Objeto
     
     public void crearCodigo() {
         Random ran = new Random();
-        int numero = ran.nextInt(9999) + 1001;
-        this.codigo = String.valueOf(numero);
+        this.codigo = String.valueOf(ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9)+""+ran.nextInt(9));
     }
     
     public String getCodigo() {
