@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Mapa
+comment1.params=ancho\ alto\ escala
+comment1.target=Mapa(int,\ int,\ int)
+comment2.params=opcion
+comment2.target=void\ cambiarInformacion(int)
+comment3.params=
+comment3.target=void\ cambiarMapa()
+comment4.params=
+comment4.target=boolean\ isLava()
+comment5.params=
+comment5.target=void\ setLava()
+comment6.params=puerta
+comment6.target=Codigo\ getCodigo(int)
+comment7.params=codigo\ puerta
+comment7.target=void\ setCodigo(java.lang.String,\ int)
+comment8.params=index
+comment8.target=Texto1\ getInformacion(int)
+comment9.params=informacion\ index
+comment9.target=void\ setInformacion(int,\ int)
+numComments=10

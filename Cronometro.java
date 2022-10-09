@@ -54,7 +54,7 @@ public class Cronometro extends Texto1
         
         while(segundos<=0) {
             if (segundos>=-5 && segundos<=0) {
-                if (!mapa1.lava) mapa1.cambiarMapa();
+                if (!mapa1.isLava()) mapa1.cambiarMapa();
                 
                 if (segundos==-5) {
                     mapa1.cambiarMapa();

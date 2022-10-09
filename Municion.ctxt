@@ -2,6 +2,6 @@
 comment0.target=Municion
 comment1.params=
 comment1.target=void\ act()
-comment2.params=mapa1
-comment2.target=void\ obtenerMunicion(Mapa1)
+comment2.params=mapa
+comment2.target=void\ obtenerMunicion(Mapa)
 numComments=3

@@ -9,10 +9,10 @@ public class Municion extends Objeto
         
     }
     
-    public void obtenerMunicion(Mapa1 mapa1) {
+    public void obtenerMunicion(Mapa mapa) {
         if (!usado) {
-            mapa1.setInformacion(3,0);
-            mapa1.setInformacion(1,1);
+            mapa.setInformacion(3,0);
+            mapa.setInformacion(1,1);
             usado = true;
         }
     }
