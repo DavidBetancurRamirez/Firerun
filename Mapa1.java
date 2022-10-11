@@ -2,32 +2,25 @@ import greenfoot.*;
 import java.util.ArrayList;
 
 public class Mapa1 extends Mapa
-{
-    private long tiempoInicial, tiempoTranscurrido;
-    private int sizeNumPuerta = 20;
-    private int sizeInfo = 25;
-    private int sizeCodigo = 16;
-    private int sizeMensaje = 14;
-    private int cantidadBombas = 1;
-    private boolean lava = false;
-    private boolean canFire = true;
-    
-    private Cronometro cronometro, tiempoLava;
-    private Texto2 mensaje = new Texto2("Crees poder llegar al trofeo...\n sin quemarte",sizeMensaje);
-    
+{    
     public Mapa1()
     {
         super(1000, 600, 1);
         preparar();
     }
     
-    public void act() {
-        
-    }
-    
     public void preparar() {  
         tiempoInicial = System.currentTimeMillis();        
         tiempoTranscurrido = tiempoInicial;
+        
+        // Puertas
+        addObject(this.crearPuerta(0,1), 650, 150);
+        addObject(this.crearPuerta(0,2), 450, 550);   
+        addObject(this.crearPuerta(90,3), 50, 250);     
+        addObject(this.crearPuerta(90,4), 350, 250);
+        addObject(this.crearPuerta(90,5), 150, 450);
+        addObject(this.crearPuerta(90,6), 350, 450);
+        addObject(this.crearPuerta(0,7), 650, 350);
         
         // Estructura
         addObject(new Muro(), 650, 50);
@@ -35,14 +28,11 @@ public class Mapa1 extends Mapa
         addObject(new Caja("2", 180), 250, 179);
         addObject(new Muro(), 450, 150);
         addObject(new Caja("X", 270), 520, 150);
-        addObject(new Puerta(0,1), 650, 150);
         addObject(new Texto1("1",sizeNumPuerta), 650, 150);
         
-        addObject(new Puerta(90,3), 50, 250);
         addObject(new Texto1("3",sizeNumPuerta), 50, 250);
         addObject(new Muro(), 150, 250);
         addObject(new Muro(), 250, 250);
-        addObject(new Puerta(90,4), 350, 250);
         addObject(new Texto1("4",sizeNumPuerta), 350, 250);
         addObject(new Muro(), 450, 250);        
         addObject(new Muro(), 550, 250); 
@@ -54,23 +44,19 @@ public class Mapa1 extends Mapa
         addObject(new Caja("5", 90), 379, 350);
         addObject(new Muro(), 450, 350);
         addObject(new Trofeo(), 550, 350);
-        addObject(new Puerta(0,7), 650, 350);
         
         addObject(new Muro(), 50, 450);
-        addObject(new Puerta(90,5), 150, 450);
         addObject(new Texto1("5",sizeNumPuerta), 150, 450);
         addObject(new Muro(), 250, 450);
-        addObject(new Puerta(90,6), 350, 450);
         addObject(new Texto1("6",sizeNumPuerta), 350, 450);
         addObject(new Muro(), 450, 450);        
         addObject(new Muro(), 550, 450); 
         addObject(new Muro(), 650, 450);
                 
         addObject(new Caja("3", 0), 250, 520);
-        addObject(new Puerta(0,2), 450, 550);
         addObject(new Texto1("2",sizeNumPuerta), 450, 550);
         addObject(new Caja("1", 0), 650, 520);
-        
+                
         // Enemigos
         int[] posicion;
         addObject(new Enemigo1(posicion=new int[]{50,50},posicion=new int[]{50,150},posicion=new int[]{350,150},posicion=new int[]{350,50},1), 50, 50);
@@ -99,9 +85,9 @@ public class Mapa1 extends Mapa
         }
         
         addObject(new Texto1("Mensaje",sizeInfo), 900, 420);
-        addObject(mensaje, 900, 465);
-        
-        // Jugador
+        addObject(this.mensaje, 900, 465);
+                
+        // Jugadores
         addObject(new Jugador1(), 750, 50);
     }
 }

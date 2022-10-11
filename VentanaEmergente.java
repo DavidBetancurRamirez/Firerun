@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class Llave extends Objeto
+public class VentanaEmergente extends Actor
 {
     public void act()
     {

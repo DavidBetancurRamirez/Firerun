@@ -13,6 +13,7 @@ public class Municion extends Objeto
         if (!usado) {
             mapa.setInformacion(3,0);
             mapa.setInformacion(1,1);
+            getWorld().removeObject(this);
             usado = true;
         }
     }

@@ -28,6 +28,20 @@ public class Caja extends Objeto
         }        
     }
     
+    public void accion(Mapa mapa) {
+        if (this.getPuerta().equals("X") && !mapa.getCodigo(mapa.codigos.size()-1).getCodigo().endsWith("?")) {
+            this.abrir();
+            mapa.setHayUltimaPista();
+            mapa.setCodigo(this.getCodigo(), mapa.codigos.size());
+            mapa.setMensaje("Busca la llave donde estaba\nla munición");
+        }
+                
+        if (!this.getPuerta().equals("X") && !this.isAbierto()) {
+            this.abrir();
+            mapa.setCodigo(this.getCodigo(), Integer.parseInt(this.getPuerta()));
+        }
+    }
+    
     public void abrir() {
         List<GreenfootImage> imagenes = gifAbrir.getImages();
         ultimaImagen = imagenes.get(imagenes.size()-1);

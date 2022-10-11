@@ -3,9 +3,20 @@ import java.util.ArrayList;
 
 public class Mapa extends World
 {
+    protected long tiempoInicial, tiempoTranscurrido;
+    protected int sizeNumPuerta = 20;
+    protected int sizeInfo = 25;
+    protected int sizeCodigo = 16;
+    protected int cantidadBombas = 1;
+    private int sizeMensaje = 14;
+    protected boolean lava, hayUltimaPista;
+    protected boolean canFire = true;
+    
+    protected Cronometro cronometro, tiempoLava;
+    protected Texto2 mensaje = new Texto2("Crees poder llegar al trofeo...\n sin quemarte",sizeMensaje);
     protected ArrayList<Codigo> codigos = new ArrayList<Codigo>();
     protected ArrayList<Texto1> informacion = new ArrayList<Texto1>(); // [balas, bombas]
-    protected boolean lava = false;
+    protected ArrayList<Puerta> puertas = new ArrayList<Puerta>();
     
     public Mapa(int ancho, int alto, int escala)
     {
@@ -30,25 +41,42 @@ public class Mapa extends World
     
     public void cambiarMapa() {
         if (lava) {
-            setBackground(new GreenfootImage("Mapa1-normal-v7.png"));
             Muro.fuego = false;
             Puerta.fuego = false;
             cambiarInformacion(1);
+            setBackground(new GreenfootImage("Mapa1-normal-v7.png"));
         } else {
-            setBackground(new GreenfootImage("Mapa1-lava-v7.png"));
             Muro.fuego = true;
             Puerta.fuego = true;
             cambiarInformacion(2);
+            setBackground(new GreenfootImage("Mapa1-lava-v7.png"));
         }
         lava=!lava;
     }
     
-    public boolean isLava() {
-        return this.lava;
+    public Puerta crearPuerta(int rotacion, int numPuerta) {
+        Puerta puerta = new Puerta(rotacion,numPuerta);
+        puertas.add(puerta);
+        return puerta;
     }
-    public void setLava() {
-        this.lava=!lava;
-        cambiarMapa();
+    
+    
+    public boolean isHayUltimaPista() {
+        return this.hayUltimaPista;
+    }
+    public void setHayUltimaPista() {
+        this.hayUltimaPista = !hayUltimaPista;
+    }
+    
+    public Texto2 getMensaje() {
+        return this.mensaje;
+    }
+    public void setMensaje(String mensaje) {
+        this.mensaje.setTexto(mensaje);
+    }
+    
+    public Puerta getPuerta(int puerta) {
+        return this.puertas.get(puerta-1);
     }
     
     public Codigo getCodigo(int puerta) {
@@ -63,5 +91,13 @@ public class Mapa extends World
     }
     public void setInformacion(int informacion, int index) {
         this.informacion.get(index).setExtra(String.valueOf(informacion));
+    }
+    
+    public boolean isLava() {
+        return this.lava;
+    }
+    public void setLava() {
+        this.lava=!lava;
+        cambiarMapa();
     }
 }

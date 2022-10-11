@@ -3,15 +3,17 @@ import java.util.List;
 
 public class Puerta extends Objeto
 {
-    protected int numPuerta;
-    protected boolean abierto = false;
+    private int numPuerta, rotacion;
+    private boolean abierto, ingresandoCodigo;
     protected static boolean fuego = false;
+    private IngresarCodigo ingresarCodigo;
     
     private GifImage gifAbrir = new GifImage("Puerta-normal-animacion-v7.2.gif");
     private GreenfootImage ultimaImagen;
     
     public Puerta(int rotacion, int numPuerta) {
         this.numPuerta = numPuerta;
+        this.rotacion = rotacion;
         setRotation(rotacion);
     }
     
@@ -40,10 +42,23 @@ public class Puerta extends Objeto
         abierto = true;
     }
     
+    public void ingresarCodigo() {
+        ingresarCodigo = new IngresarCodigo(numPuerta);
+        getWorld().addObject(ingresarCodigo,400,300);
+        ingresandoCodigo = true;
+    }
+    
+    public int getRotacion() {
+        return this.rotacion;
+    }
+    public void setRotacion(int rotacion) {
+        this.rotacion = rotacion;
+    }
+    
     public boolean isAbierto() {
         return this.abierto;
     }
-    public void setAbierto(boolean abierto) {
-        this.abierto = abierto;
+    public void setAbierto() {
+        this.abierto = !abierto;
     }
 }

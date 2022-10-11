@@ -7,12 +7,12 @@ public abstract class Enemigo extends Actor
         
     }
     
-    public void validarColision() {
+    public void validarColision() {/*
         Actor jugador = getOneIntersectingObject(Jugador1.class);
         
         if (jugador != null) {
             System.out.println("you lose");
             Greenfoot.stop();
-        }
+        }*/
     }
 }
