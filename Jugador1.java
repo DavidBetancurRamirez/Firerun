@@ -4,9 +4,9 @@ import java.util.List;
 public class Jugador1 extends Jugador
 {
     private Mapa mapa;
-    private boolean buscandoLlave;
     private boolean canFireQ = true;
     private boolean canFireE = true;
+    private boolean canFireP = true;
     
     private GifImage gifArriba = new GifImage("personaje-arriba-v3.gif");
     private GifImage gifDerecha = new GifImage("personaje-derecha-v3.gif");
@@ -14,30 +14,32 @@ public class Jugador1 extends Jugador
     private GifImage gifIzquierda = new GifImage("personaje-izquierda-v3.gif");
     
     public void act() 
-    {
-        mapa = (Mapa)getWorld();
+    {        
+        if (!pause) {
+            mapa = (Mapa)getWorld();
+            moverse();
+            
+            //if (mapa.isLava()) lava();
+            if (!buscandoLlave && mapa.isHayUltimaPista()) buscandoLlave = true;
+        }
         
-        moverse();
         acciones();
-        
-        if (mapa.isLava()) lava();
-        if (mapa.isHayUltimaPista()) buscandoLlave = true;
     }
     
     public void moverse() {
-        if (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right")) {
+        if (Greenfoot.isKeyDown("d")) {
             setLocation(getX()+1,getY());
             setImage(gifDerecha.getCurrentImage());
         }
-        if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left")) {
+        if (Greenfoot.isKeyDown("a")) {
             setLocation(getX()-1,getY());
             setImage(gifIzquierda.getCurrentImage());
         }
-        if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) {
+        if (Greenfoot.isKeyDown("w")) {
             setLocation(getX(),getY()-1);
             setImage(gifArriba.getCurrentImage());
         }
-        if (Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) {
+        if (Greenfoot.isKeyDown("s")) {
             setLocation(getX(),getY()+1);
             setImage(gifAbajo.getCurrentImage());
         }
@@ -52,7 +54,7 @@ public class Jugador1 extends Jugador
             
             if (getIntersectingObjects(Puerta.class).size() > 0) {
                 Puerta puerta = (Puerta)getIntersectingObjects(Puerta.class).get(0);                
-                if(!puerta.isAbierto()) puerta.ingresarCodigo();
+                if(!puerta.isAbierto()) puerta.ingresarCodigo(this);
             }
             
             if (getIntersectingObjects(Municion.class).size() > 0) {
@@ -73,14 +75,20 @@ public class Jugador1 extends Jugador
         } else if (!Greenfoot.isKeyDown("q")) {
             canFireQ = true;
         }
+        
+        if (Greenfoot.isKeyDown("p") && canFireP) { // Pause           
+            mapa.pause(1);
+            canFireP = false;
+        } else if (!Greenfoot.isKeyDown("p")) {
+            canFireP = true;
+        }
     }
     
     public void lava() {
-        /*
         if (!mapa.getColorAt(getX(),getY()).equals(new Color(239, 184, 16))) {
             System.out.println("Te has quemado");
             Greenfoot.stop();
-        }*/
+        }
     }
     
     public void setLocation(int x,int y) {
@@ -90,7 +98,10 @@ public class Jugador1 extends Jugador
         
         // Buscando la llave
         if (buscandoLlave) {
-            if (x>=40 && x<=60 && y>=340 && y<=360) mapa.addObject(new Llave(),350,350);
+            if (x>=40 && x<=60 && y>=340 && y<=360) {
+                mapa.addObject(new Llave(),350,350);
+                buscandoLlave = false;
+            }
         }
         
         // Colision con limites del mapa

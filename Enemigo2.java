@@ -17,8 +17,10 @@ public class Enemigo2 extends Enemigo
     }
     
     public void act() {
-        moverse();
-        validarColision();
+        if (!pause) {
+            moverse();
+            validarColision();
+        }
     }
     
     public void moverse() {

@@ -6,7 +6,6 @@ public class Puerta extends Objeto
     private int numPuerta, rotacion;
     private boolean abierto, ingresandoCodigo;
     protected static boolean fuego = false;
-    private IngresarCodigo ingresarCodigo;
     
     private GifImage gifAbrir = new GifImage("Puerta-normal-animacion-v7.2.gif");
     private GreenfootImage ultimaImagen;
@@ -42,10 +41,8 @@ public class Puerta extends Objeto
         abierto = true;
     }
     
-    public void ingresarCodigo() {
-        ingresarCodigo = new IngresarCodigo(numPuerta);
-        getWorld().addObject(ingresarCodigo,400,300);
-        ingresandoCodigo = true;
+    public void ingresarCodigo(Jugador jugador) {
+        getWorld().addObject(new IngresarCodigo(numPuerta, jugador),400,300);
     }
     
     public int getRotacion() {

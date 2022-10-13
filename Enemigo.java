@@ -2,6 +2,8 @@ import greenfoot.*;
 
 public abstract class Enemigo extends Actor
 {    
+    protected static boolean pause = false;
+    
     public void act()
     {
         

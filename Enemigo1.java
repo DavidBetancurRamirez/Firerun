@@ -33,8 +33,10 @@ public class Enemigo1 extends Enemigo
     }
     
     public void act() {
-        moverse();
-        validarColision();
+        if (!pause) {
+            moverse();
+            validarColision();
+        }
     }
     
     public void moverse() {

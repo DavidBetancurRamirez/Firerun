@@ -66,10 +66,10 @@ public class Mapa1 extends Mapa
         
         // Zona informacion
         addObject(new Texto1("Tiempo:",sizeInfo), 900, 20);
-        tiempoLava = new Cronometro("Lava: 20",sizeInfo,tiempoInicial,false);
-        tiempoLava.setSegundos(20);
-        cronometro = new Cronometro("00:00",sizeInfo,tiempoInicial,true);
+        tiempoLava = new Tiempo("Lava: "+tiempoEntreLava,sizeInfo,tiempoEntreLava,tiempoInicial,false);
+        tiempoLava.setSegundos(tiempoEntreLava);
         addObject(tiempoLava, 900, 170);
+        cronometro = new Tiempo("00:00",sizeInfo,tiempoEntreLava,tiempoInicial,true);
         addObject(cronometro, 900, 50);
         informacion.add(new Texto1("Balas:",sizeInfo,"3"));
         addObject(informacion.get(0), 900, 90);

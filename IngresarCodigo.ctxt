@@ -1,9 +1,13 @@
 #BlueJ class context
 comment0.target=IngresarCodigo
-comment1.params=puerta
-comment1.target=IngresarCodigo(int)
+comment1.params=puerta\ jugador
+comment1.target=IngresarCodigo(int,\ Jugador)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ ingresarDigito()
-numComments=4
+comment4.params=
+comment4.target=void\ borrar()
+comment5.params=
+comment5.target=void\ salir()
+numComments=6

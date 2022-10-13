@@ -4,15 +4,17 @@ import java.util.ArrayList;
 public class Mapa extends World
 {
     protected long tiempoInicial, tiempoTranscurrido;
+    protected int tiempoEntreLava = 30;
     protected int sizeNumPuerta = 20;
     protected int sizeInfo = 25;
     protected int sizeCodigo = 16;
-    protected int cantidadBombas = 1;
     private int sizeMensaje = 14;
-    protected boolean lava, hayUltimaPista;
+    protected int cantidadBombas = 1;
+    protected boolean lava, hayUltimaPista, pause;
     protected boolean canFire = true;
     
-    protected Cronometro cronometro, tiempoLava;
+    protected Pause ventanaPause;
+    protected Tiempo cronometro, tiempoLava;
     protected Texto2 mensaje = new Texto2("Crees poder llegar al trofeo...\n sin quemarte",sizeMensaje);
     protected ArrayList<Codigo> codigos = new ArrayList<Codigo>();
     protected ArrayList<Texto1> informacion = new ArrayList<Texto1>(); // [balas, bombas]
@@ -21,22 +23,6 @@ public class Mapa extends World
     public Mapa(int ancho, int alto, int escala)
     {
         super(ancho, alto, escala); 
-    }
-    
-    public void cambiarInformacion(int opcion) {
-        if (opcion == 1) {
-            Texto1.color2 = new Color(135,161,171);
-            Texto2.color2 = new Color(102,111,136);
-            for (int i=0;i<codigos.size();i++) {
-                codigos.get(i).setColor2(new Color(102,111,136));
-            }
-        } else if (opcion == 2) {
-            Texto1.color2 = new Color(250,99,81);
-            Texto2.color2 = new Color(225,68,70);
-            for (int i=0;i<codigos.size();i++) {
-                codigos.get(i).setColor2(new Color(225,68,70));
-            }
-        }
     }
     
     public void cambiarMapa() {
@@ -54,12 +40,59 @@ public class Mapa extends World
         lava=!lava;
     }
     
+    public void cambiarInformacion(int opcion) {
+        // Opcion 1: Cambiar colores de mapa-normal
+        // Opcion 2: Cambiar colores de mapa-lava
+        if (opcion == 1) {
+            Texto1.color2 = new Color(135,161,171);
+            Texto2.color2 = new Color(102,111,136);
+            for (int i=0;i<codigos.size();i++) {
+                codigos.get(i).setColor2(new Color(102,111,136));
+            }
+        } else if (opcion == 2) {
+            Texto1.color2 = new Color(250,99,81);
+            Texto2.color2 = new Color(225,68,70);
+            for (int i=0;i<codigos.size();i++) {
+                codigos.get(i).setColor2(new Color(225,68,70));
+            }
+        }
+    }
+    
     public Puerta crearPuerta(int rotacion, int numPuerta) {
         Puerta puerta = new Puerta(rotacion,numPuerta);
         puertas.add(puerta);
         return puerta;
     }
     
+    public void pause() {
+        pause = !pause;
+        Enemigo.pause = !Enemigo.pause;
+        Jugador.pause = !Jugador.pause;
+        Armas.pause = !Armas.pause;
+    }
+    
+    public void pause(int x) {
+        pause();
+        if (pause) {
+            ventanaPause = new Pause();
+            addObject(ventanaPause, 500, 300);
+        }  else removeObject(ventanaPause);
+    }
+    
+    public boolean isLava() {
+        return this.lava;
+    }
+    public void setLava() {
+        this.lava=!lava;
+        cambiarMapa();
+    }
+    
+    public boolean isPause() {
+        return this.pause;
+    }
+    public void setPause() {
+        this.pause = !pause;
+    }
     
     public boolean isHayUltimaPista() {
         return this.hayUltimaPista;
@@ -91,13 +124,5 @@ public class Mapa extends World
     }
     public void setInformacion(int informacion, int index) {
         this.informacion.get(index).setExtra(String.valueOf(informacion));
-    }
-    
-    public boolean isLava() {
-        return this.lava;
-    }
-    public void setLava() {
-        this.lava=!lava;
-        cambiarMapa();
     }
 }
