@@ -8,7 +8,7 @@ public class Mapa extends World
     protected int sizeNumPuerta = 20;
     protected int sizeInfo = 25;
     protected int sizeCodigo = 16;
-    private int sizeMensaje = 14;
+    protected int sizeMensaje = 14;
     protected int cantidadBombas = 1;
     protected boolean lava, hayUltimaPista, pause;
     protected boolean canFire = true;
@@ -16,9 +16,11 @@ public class Mapa extends World
     protected Pause ventanaPause;
     protected Tiempo cronometro, tiempoLava;
     protected Texto2 mensaje = new Texto2("Crees poder llegar al trofeo...\n sin quemarte",sizeMensaje);
+    
     protected ArrayList<Codigo> codigos = new ArrayList<Codigo>();
     protected ArrayList<Texto1> informacion = new ArrayList<Texto1>(); // [balas, bombas]
     protected ArrayList<Puerta> puertas = new ArrayList<Puerta>();
+    protected ArrayList<Boton> botonesPause = new ArrayList<Boton>(); // [reintentar, volver]
     
     public Mapa(int ancho, int alto, int escala)
     {
@@ -71,12 +73,24 @@ public class Mapa extends World
         Armas.pause = !Armas.pause;
     }
     
-    public void pause(int x) {
+    public void pause(int x) { // Sacar pantalla emergente de pause
         pause();
+        
         if (pause) {
             ventanaPause = new Pause();
+            botonesPause.add(new Boton(2));
+            botonesPause.add(new Boton(3));
+            botonesPause.add(new Boton(4));
+            
             addObject(ventanaPause, 500, 300);
-        }  else removeObject(ventanaPause);
+            addObject(botonesPause.get(0), 325, 320);
+            addObject(botonesPause.get(1), 675, 320);
+            addObject(botonesPause.get(2), 500, 410);
+        }  else {
+            removeObject(ventanaPause);
+            for (Boton boton : botonesPause) removeObject(boton);
+            botonesPause.clear();
+        }
     }
     
     public boolean isLava() {

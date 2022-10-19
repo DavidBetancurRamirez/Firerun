@@ -7,8 +7,4 @@ public class Home extends World
         super(1000, 600, 1);
         Greenfoot.setWorld(new Mapa1());
     }
-    
-    public void act() {
-        
-    }
 }

@@ -47,17 +47,17 @@ public class Jugador1 extends Jugador
     
     public void acciones() {        
         if (Greenfoot.isKeyDown("e") && canFireE && !getIntersectingObjects(Objeto.class).isEmpty()) { // Acciones varias
-            if (getIntersectingObjects(Caja.class).size() > 0) {
+            if (getIntersectingObjects(Caja.class).size() > 0) { // Abrir caja
                 Caja caja = (Caja)getIntersectingObjects(Caja.class).get(0);                
                 caja.accion(mapa);
             }
             
-            if (getIntersectingObjects(Puerta.class).size() > 0) {
+            if (getIntersectingObjects(Puerta.class).size() > 0) { // Abrir puerta
                 Puerta puerta = (Puerta)getIntersectingObjects(Puerta.class).get(0);                
                 if(!puerta.isAbierto()) puerta.ingresarCodigo(this);
             }
             
-            if (getIntersectingObjects(Municion.class).size() > 0) {
+            if (getIntersectingObjects(Municion.class).size() > 0) { // Obtener municion
                 Municion municion = (Municion)getIntersectingObjects(Municion.class).get(0);
                 municion.obtenerMunicion(mapa);
             }

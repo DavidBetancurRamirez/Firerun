@@ -2,7 +2,11 @@ import greenfoot.*;
 
 public class Pause extends VentanaEmergente
 {    
-    public Pause() {
-        getImage().scale(900,500);
+    public void act()
+    {
+        if (Greenfoot.isKeyDown("escape")) {
+            Mapa mapa = (Mapa)getWorld();
+            mapa.pause(1);
+        }
     }
 }

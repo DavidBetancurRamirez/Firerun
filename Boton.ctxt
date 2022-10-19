@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Boton
+comment1.params=accion
+comment1.target=Boton(int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ clickMouse()
+comment4.params=
+comment4.target=int\ getAccion()
+numComments=5
