@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Enemigo2
+comment1.params=posicionInicial\ posicionFinal\ este
+comment1.target=Enemigo2(int,\ int,\ boolean)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ moverse()
+numComments=4

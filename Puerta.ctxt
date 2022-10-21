@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Puerta
+comment1.params=rotacion\ numPuerta
+comment1.target=Puerta(int,\ int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ cambiarImagen()
+comment4.params=
+comment4.target=void\ abrir()
+comment5.params=jugador
+comment5.target=void\ ingresarCodigo(Jugador)
+comment6.params=
+comment6.target=int\ getRotacion()
+comment7.params=rotacion
+comment7.target=void\ setRotacion(int)
+comment8.params=
+comment8.target=boolean\ isAbierto()
+comment9.params=
+comment9.target=void\ setAbierto()
+numComments=10

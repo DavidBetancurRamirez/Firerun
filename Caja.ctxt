@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Caja
+comment1.params=puerta\ rotacion
+comment1.target=Caja(java.lang.String,\ int)
+comment10.params=
+comment10.target=boolean\ isAbierto()
+comment11.params=
+comment11.target=void\ setAbierto()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=mapa
+comment3.target=void\ accion(Mapa)
+comment4.params=
+comment4.target=void\ abrir()
+comment5.params=
+comment5.target=void\ crearCodigo()
+comment6.params=
+comment6.target=java.lang.String\ getCodigo()
+comment7.params=codigo
+comment7.target=void\ setCodigo(java.lang.String)
+comment8.params=
+comment8.target=java.lang.String\ getPuerta()
+comment9.params=puerta
+comment9.target=void\ setPuerta(java.lang.String)
+numComments=12

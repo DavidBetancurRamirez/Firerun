@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Texto2
+comment1.params=texto\ tama\u00F1o
+comment1.target=Texto2(java.lang.String,\ int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=java.lang.String\ getTexto()
+comment4.params=texto
+comment4.target=void\ setTexto(java.lang.String)
+comment5.params=
+comment5.target=greenfoot.Color\ getColor2()
+comment6.params=color
+comment6.target=void\ setColor2(greenfoot.Color)
+numComments=7

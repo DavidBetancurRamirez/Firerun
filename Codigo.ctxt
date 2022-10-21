@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Codigo
+comment1.params=texto\ tama\u00F1o\ codigo
+comment1.target=Codigo(java.lang.String,\ int,\ java.lang.String)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=java.lang.String\ getCodigo()
+comment4.params=codigo\ puerta
+comment4.target=void\ setCodigo(java.lang.String,\ int)
+numComments=5
