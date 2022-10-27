@@ -12,4 +12,6 @@ comment5.params=
 comment5.target=int\ getSegundos()
 comment6.params=segundos
 comment6.target=void\ setSegundos(int)
-numComments=7
+comment7.params=
+comment7.target=int\ getSegundosTotales()
+numComments=8

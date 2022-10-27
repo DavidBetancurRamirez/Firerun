@@ -4,9 +4,9 @@ import java.util.List;
 public class Jugador1 extends Jugador
 {
     private Mapa mapa;
-    private boolean canFireQ = true;
-    private boolean canFireE = true;
-    private boolean canFireP = true;
+    private int velocidad = 2;
+    private boolean[] canFire = new boolean[4]; // [e,q,p,espace]
+    private int direccionDisparo=2;
     
     private GifImage gifArriba = new GifImage("personaje-arriba-v3.gif");
     private GifImage gifDerecha = new GifImage("personaje-derecha-v3.gif");
@@ -19,7 +19,7 @@ public class Jugador1 extends Jugador
             mapa = (Mapa)getWorld();
             moverse();
             
-            //if (mapa.isLava()) lava();
+            if (mapa.isLava()) lava();
             if (!buscandoLlave && mapa.isHayUltimaPista()) buscandoLlave = true;
         }
         
@@ -28,25 +28,30 @@ public class Jugador1 extends Jugador
     
     public void moverse() {
         if (Greenfoot.isKeyDown("d")) {
-            setLocation(getX()+1,getY());
+            setLocation(getX()+velocidad,getY());
             setImage(gifDerecha.getCurrentImage());
+            direccionDisparo=2;
         }
         if (Greenfoot.isKeyDown("a")) {
-            setLocation(getX()-1,getY());
+            setLocation(getX()-velocidad,getY());
             setImage(gifIzquierda.getCurrentImage());
+            direccionDisparo=3;
         }
         if (Greenfoot.isKeyDown("w")) {
-            setLocation(getX(),getY()-1);
+            setLocation(getX(),getY()-velocidad);
             setImage(gifArriba.getCurrentImage());
+            direccionDisparo=0;
         }
         if (Greenfoot.isKeyDown("s")) {
-            setLocation(getX(),getY()+1);
+            setLocation(getX(),getY()+velocidad);
             setImage(gifAbajo.getCurrentImage());
+            direccionDisparo=1;
         }
+        setDisparo(direccionDisparo);
     }
     
     public void acciones() {        
-        if (Greenfoot.isKeyDown("e") && canFireE && !getIntersectingObjects(Objeto.class).isEmpty()) { // Acciones varias
+        if (Greenfoot.isKeyDown("e") && canFire[0] && !getIntersectingObjects(Objeto.class).isEmpty()) { // Acciones varias
             if (getIntersectingObjects(Caja.class).size() > 0) { // Abrir caja
                 Caja caja = (Caja)getIntersectingObjects(Caja.class).get(0);                
                 caja.accion(mapa);
@@ -61,33 +66,47 @@ public class Jugador1 extends Jugador
                 Municion municion = (Municion)getIntersectingObjects(Municion.class).get(0);
                 municion.obtenerMunicion(mapa);
             }
-            canFireE = false;
+            canFire[0] = false;
         } else if (!Greenfoot.isKeyDown("q")) {
-            canFireE = true;
+            canFire[0] = true;
         }
         
-        if (Greenfoot.isKeyDown("q") && canFireQ) { // Colocar bomba            
+        if (Greenfoot.isKeyDown("q") && canFire[1]) { // Colocar bomba
             if (Integer.parseInt(mapa.getInformacion(1).getExtra()) > 0) {
-                mapa.addObject(new Bomba(), getX(), getY()); 
+                mapa.addObject(new Bomba(), getX(), getY());
                 mapa.setInformacion(Integer.parseInt(mapa.getInformacion(1).getExtra())-1,1);
             }
-            canFireQ = false;
+            canFire[1] = false;
         } else if (!Greenfoot.isKeyDown("q")) {
-            canFireQ = true;
+            canFire[1] = true;
         }
         
-        if (Greenfoot.isKeyDown("p") && canFireP) { // Pause           
+        if (Greenfoot.isKeyDown("p") && canFire[2]) { // Pause           
             mapa.pause(1);
-            canFireP = false;
+            canFire[2] = false;
         } else if (!Greenfoot.isKeyDown("p")) {
-            canFireP = true;
+            canFire[2] = true;
+        }
+    }
+    
+     public void setDisparo(int direction){
+        if(canFire[3] && Greenfoot.isKeyDown("SPACE")){
+            if (Integer.parseInt(mapa.getInformacion(0).getExtra()) > 0) {
+                Greenfoot.playSound("TiroFirerun.mp3");
+                Disparo disparo = new Disparo(direction);
+                mapa.addObject(disparo, getX(),getY());
+                mapa.setInformacion(Integer.parseInt(mapa.getInformacion(0).getExtra())-1,0);
+            }
+            canFire[3]= false;
+        }
+        if (!canFire[3] && !Greenfoot.isKeyDown("SPACE")){
+            canFire[3] = true;
         }
     }
     
     public void lava() {
         if (!mapa.getColorAt(getX(),getY()).equals(new Color(239, 184, 16))) {
-            System.out.println("Te has quemado");
-            Greenfoot.stop();
+            Greenfoot.setWorld(new GameOver());
         }
     }
     

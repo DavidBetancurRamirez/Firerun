@@ -1,7 +1,19 @@
 #BlueJ class context
 comment0.target=Enemigo
-comment1.params=
-comment1.target=void\ act()
+comment1.params=indice\ variasDirecciones
+comment1.target=Enemigo(int,\ boolean)
 comment2.params=
-comment2.target=void\ validarColision()
-numComments=3
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ validarColision()
+comment4.params=
+comment4.target=void\ mantenerMuerto()
+comment5.params=
+comment5.target=boolean\ getVivo()
+comment6.params=vivo
+comment6.target=void\ setVivo(boolean)
+comment7.params=
+comment7.target=int\ getIndice()
+comment8.params=
+comment8.target=boolean\ isVariasDirecciones()
+numComments=9

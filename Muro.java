@@ -6,6 +6,7 @@ public class Muro extends Objeto
     
     public void act()
     {
+        remover2();
         if (fuego) {
             setImage(new GreenfootImage("Muro-lava-v1.png"));
         }

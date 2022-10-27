@@ -6,4 +6,10 @@ public class Objeto extends Actor
     {
         
     }
+    
+     public void remover2(){
+        Actor obj = getOneIntersectingObject(Disparo.class);
+        
+        if(obj!=null)  getWorld().removeObject(obj);
+    }
 }

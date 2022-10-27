@@ -6,7 +6,7 @@ public class Municion extends Objeto
     
     public void act()
     {
-        
+        remover2();
     }
     
     public void obtenerMunicion(Mapa mapa) {

@@ -7,12 +7,10 @@ public class Boton extends Actor
     public Boton(int accion) {
         switch (accion) {
             case 0: // Play
-                //setImage(new GreenfootImage("-v1.png"));
-                System.out.println("Aun no");
+                setImage(new GreenfootImage("continuar-v2.png"));
                 break;
-            case 1: // Instrucciones
-                //setImage(new GreenfootImage("-v1.png"));
-                System.out.println("Aun no");
+            case 1: // ¿Cómo jugar?
+                setImage(new GreenfootImage("como-jugar-v2.png"));
                 break;
             case 2: // Continuar
                 setImage(new GreenfootImage("continuar-v2.png"));
@@ -42,20 +40,20 @@ public class Boton extends Actor
             
             switch (botonAccion.getAccion()) {
                 case 0: // Play
-                    System.out.println("Play");
+                    Greenfoot.setWorld(new Mapa1());
                     break;
                 case 1: // Instrucciones
-                    System.out.println("Instrucciones");
+                    Greenfoot.setWorld(new Tutorial());
                     break;
                 case 2: // Continuar
                     Mapa mapa = (Mapa)getWorld();
                     mapa.pause(1);
                     break;
                 case 3: // Reintentar
-                    System.out.println("Reintentar");
+                    Greenfoot.setWorld(new Mapa1());
                     break;
                 case 4: // Volver
-                    System.out.println("Volver");
+                    Greenfoot.setWorld(new Home());
                     break;
                 default:                
                     System.out.println("Aun no");

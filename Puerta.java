@@ -18,6 +18,7 @@ public class Puerta extends Objeto
     
     public void act()
     {
+        if (!abierto) remover2();
         cambiarImagen();
     }
     

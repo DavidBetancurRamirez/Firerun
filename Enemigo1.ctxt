@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=Enemigo1
-comment1.params=posicion1\ posicion2\ posicion3\ posicion4\ primerDireccion
-comment1.target=Enemigo1(int[],\ int[],\ int[],\ int[],\ int)
-comment2.params=posicionInicial\ posicionFinal\ este
-comment2.target=Enemigo1(int[],\ int[],\ boolean)
+comment1.params=indice\ posicion1\ posicion2\ posicion3\ posicion4\ primerDireccion
+comment1.target=Enemigo1(int,\ int[],\ int[],\ int[],\ int[],\ int)
+comment2.params=indice\ posicionInicial\ posicionFinal\ este
+comment2.target=Enemigo1(int,\ int[],\ int[],\ boolean)
 comment3.params=
 comment3.target=void\ act()
 comment4.params=

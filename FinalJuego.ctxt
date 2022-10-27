@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=FinalJuego
+comment1.params=ancho\ alto\ escala
+comment1.target=FinalJuego(int,\ int,\ int)
+comment2.params=posicionY
+comment2.target=void\ crearBotones(int)
+numComments=3

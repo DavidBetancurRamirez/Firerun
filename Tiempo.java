@@ -2,8 +2,7 @@ import greenfoot.*;
 
 public class Tiempo extends Texto1
 {
-    private int segundos = 0;
-    private int minutos = 0;
+    private int segundos, minutos, segundosTotales;
     private int tiempoEntreLava = 30;
     private int ultimoSegundo, duracionMilise, duracionSe, tiempoPausado, tiempoParaLava;
     private int[] tiempoPrePause = new int[3]; // [minutos,segundos,tiempoParaLava]
@@ -59,21 +58,23 @@ public class Tiempo extends Texto1
             }
         }
         
+        segundosTotales = segundos*(minutos+1);
+
         setTexto(String.format("%02d", minutos)+":"+String.format("%02d", segundos));
     }
     
     public void disminuirTiempo(int tiempo) {   
         World world = getWorld();
-        Mapa1 mapa1 = (Mapa1)getWorld();
+        Mapa mapa = (Mapa)getWorld();
             
         segundos = tiempo;
         
         while(segundos<=0) {
             if (segundos>=-5 && segundos<=0) {
-                if (!mapa1.isLava()) mapa1.cambiarMapa();
+                if (!mapa.isLava()) mapa.cambiarMapa();
                 
                 if (segundos==-5) {
-                    mapa1.cambiarMapa();
+                    mapa.cambiarMapa();
                     segundos=tiempoEntreLava;
                     break;
                 }
@@ -93,5 +94,9 @@ public class Tiempo extends Texto1
     }
     public void setSegundos(int segundos) {
         this.segundos = segundos;
+    }
+    
+    public int getSegundosTotales() {
+        return this.segundosTotales;
     }
 }

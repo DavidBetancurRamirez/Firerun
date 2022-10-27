@@ -8,6 +8,7 @@ public class Llave extends Objeto
     
     public void act()
     {
+        remover2();
         recoger();
     }
     
