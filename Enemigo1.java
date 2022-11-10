@@ -3,14 +3,12 @@ import java.util.ArrayList;
 
 public class Enemigo1 extends Enemigo
 {
-    private int velocidad = 2; // Movimiento en pixeles
-    
     private GifImage gifArriba = new GifImage("monstruo1-arriba-v2.gif");
     private GifImage gifAbajo = new GifImage("monstruo1-abajo-v2.gif");
     
     // Movimiento en varias direcciones
     public Enemigo1(int indice, int[] posicion1, int[] posicion2, int[] posicion3, int[] posicion4, int primerDireccion) {
-        super(indice,true);
+        super(indice,2,true, new GreenfootImage("muerte-monstruo.png"), new GifImage("revivir-monstruo.gif"));
         this.posiciones.add(posicion1);
         this.posiciones.add(posicion2);
         this.posiciones.add(posicion3);
@@ -18,10 +16,10 @@ public class Enemigo1 extends Enemigo
         this.primerDireccion = primerDireccion;
         this.direcciones[primerDireccion] = true;
     }
-    
+
     // Para movimiento unicamente horizontal
     public Enemigo1(int indice, int[] posicionInicial, int[] posicionFinal, boolean este) {
-        super(indice,false);
+        super(indice,2,false, new GreenfootImage("muerte-monstruo.png"), new GifImage("revivir-monstruo.gif"));
         this.posiciones.add(posicionInicial);
         this.posiciones.add(posicionFinal);
         this.este = este;
@@ -29,8 +27,17 @@ public class Enemigo1 extends Enemigo
     }
     
     public void act() {
+        if (reviviendo) {
+            setImage(gifRevivir.get(0).getCurrentImage());
+            if (getImage() == ultimaImagen) {
+                crearNuevoMonstruo();
+                vivo = true;
+                reviviendo = false;
+            }
+        }
+        
         if (!vivo) mantenerMuerto();
-        if (!pause && vivo) {
+        else if (!pause) {
             moverse();
             validarColision();
         }

@@ -11,8 +11,8 @@ public class Municion extends Objeto
     
     public void obtenerMunicion(Mapa mapa) {
         if (!usado) {
-            mapa.setInformacion(3,0);
-            mapa.setInformacion(1,1);
+            mapa.setInformacion(mapa.getMunicionInicial()[0],0);
+            mapa.setInformacion(mapa.getMunicionInicial()[1],1);
             getWorld().removeObject(this);
             usado = true;
         }

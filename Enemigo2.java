@@ -3,13 +3,11 @@ import java.util.ArrayList;
 
 public class Enemigo2 extends Enemigo
 {
-    private int velocidad=4; // Movimiento en pixeles
-    
     private GifImage gifDerecha = new GifImage("perro-derecha-v4.gif");
     private GifImage gifIzquierda = new GifImage("perro-izquierda-v4.gif");
     
-    public Enemigo2(int indice, int[] posicionInicial, int[] posicionFinal, boolean este) {
-        super(indice,false);
+    public Enemigo2(int indice, int[] posicionInicial, int[] posicionFinal, boolean este) {        
+        super(indice,4,false,new GreenfootImage("perro-muerto.png"), new GifImage("revivir-perro-oeste.gif"), new GifImage("revivir-perro-este.gif"));
         this.posiciones.add(posicionInicial);
         this.posiciones.add(posicionFinal);
         this.este = este;
@@ -17,8 +15,19 @@ public class Enemigo2 extends Enemigo
     }
     
     public void act() {
+        if (reviviendo) {
+            int index = 0;
+            if (this instanceof Enemigo2 && este) index = 1;
+            setImage(gifRevivir.get(index).getCurrentImage());
+            if (getImage() == ultimaImagen) {
+                crearNuevoMonstruo();
+                vivo = true;
+                reviviendo = false;
+            }
+        }
+        
         if (!vivo) mantenerMuerto();
-        if (!pause && vivo) {
+        else if (!pause) {
             moverse();
             validarColision();
         }

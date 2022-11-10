@@ -36,6 +36,7 @@ public class Puerta extends Objeto
     }
     
     public void abrir() {
+        Greenfoot.playSound("sonido-puerta-v1.mp3");
         List<GreenfootImage> imagenes = gifAbrir.getImages();
         ultimaImagen = imagenes.get(imagenes.size()-1);
         setImage(gifAbrir.getCurrentImage());

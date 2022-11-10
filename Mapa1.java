@@ -1,37 +1,32 @@
 import greenfoot.*;
-import java.util.ArrayList;
 
 public class Mapa1 extends Mapa
 {    
     public Mapa1()
     {
-        super(1000, 600, 1, new GreenfootImage("Mapa1-normal-v7.png"), new GreenfootImage("Mapa1-lava-v7.png"));
+        super(30, 3, 1, new GreenfootImage("Mapa1-normal-v7.png"), new GreenfootImage("Mapa1-lava-v7.png"), new GreenfootImage("Mapa1-agrietado-v1.png"));
         preparar();
+    }
+    
+    public void act() {
+        if (tiempoLava.getSegundos() == 5 && !mapaAgrietado) agrietarMapa();
     }
     
     public void preparar() {        
         // Puertas
-        addObject(this.crearPuerta(0,1), 650, 150);
-        addObject(this.crearPuerta(0,2), 450, 550);   
-        addObject(this.crearPuerta(90,3), 50, 250);     
-        addObject(this.crearPuerta(90,4), 350, 250);
-        addObject(this.crearPuerta(90,5), 150, 450);
-        addObject(this.crearPuerta(90,6), 350, 450);
-        addObject(this.crearPuerta(0,7), 650, 350);
-        
-        addObject(new Texto1("1",size[0]), 650, 150);
-        addObject(new Texto1("2",size[0]), 450, 550);
-        addObject(new Texto1("3",size[0]), 50, 250);
-        addObject(new Texto1("4",size[0]), 350, 250);
-        addObject(new Texto1("5",size[0]), 150, 450);
-        addObject(new Texto1("6",size[0]), 350, 450);
+        this.crearPuerta(0,1,650,150);
+        this.crearPuerta(0,2,450,550);   
+        this.crearPuerta(90,3,50,250);     
+        this.crearPuerta(90,4,350,250);
+        this.crearPuerta(0,5,650,350);
         
         // Estructura
         addObject(new Muro(), 650, 50);
         
         addObject(new Caja("2", 180), 250, 179);
         addObject(new Muro(), 450, 150);
-        addObject(new Caja("X", 270), 520, 150);
+        cajaX = new Caja("X", 270);
+        addObject(cajaX, 520, 150);
         
         addObject(new Muro(), 150, 250);
         addObject(new Muro(), 250, 250);
@@ -47,7 +42,9 @@ public class Mapa1 extends Mapa
         addObject(new Trofeo(), 550, 350);
         
         addObject(new Muro(), 50, 450);
+        addObject(new Muro(), 150, 450);
         addObject(new Muro(), 250, 450);
+        addObject(new Muro(), 350, 450);
         addObject(new Muro(), 450, 450);        
         addObject(new Muro(), 550, 450); 
         addObject(new Muro(), 650, 450);
@@ -55,18 +52,14 @@ public class Mapa1 extends Mapa
         addObject(new Caja("3", 0), 250, 520);
         addObject(new Caja("1", 0), 650, 520);
                 
-        // Informacion
-        informacion.add(new Texto1("Balas:",size[1],"3"));
-        addObject(informacion.get(0), 900, 90);
-        informacion.add(new Texto1("Bombas:",size[1],"1"));
-        addObject(informacion.get(1), 900, 130);
         
-        int anterior = 255;
-        for (int i=0; i<6; i++) {
-            codigos.add(new Codigo("Codigo puerta"+(i+1)+":",size[2], "??"));
-            addObject(codigos.get(i), 900, anterior);
-            anterior+=24;
-        }
+        coordenadasMunicion[0] = 50;
+        coordenadasMunicion[1] = 350;
+        coordenadasLlave[0] = 350;
+        coordenadasLlave[1] = 350;
+        
+        // Informacion
+        crearCodigos(255);
         
         // Enemigos
         int[] posicion;

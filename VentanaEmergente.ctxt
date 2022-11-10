@@ -2,4 +2,12 @@
 comment0.target=VentanaEmergente
 comment1.params=
 comment1.target=void\ act()
-numComments=2
+comment2.params=
+comment2.target=void\ salir()
+comment3.params=world
+comment3.target=void\ salir(greenfoot.World)
+comment4.params=
+comment4.target=Texto\ getTexto()
+comment5.params=texto
+comment5.target=void\ setTexto(Texto)
+numComments=6

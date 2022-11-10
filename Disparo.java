@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class Disparo extends Arma
 {
-    private int velocidad=5;
+    private int velocidad=6;
     private int position;
     
     public Disparo(int direction){
@@ -38,7 +38,7 @@ public class Disparo extends Arma
     public void remover () {
         Enemigo enemigo = (Enemigo)getOneIntersectingObject(Enemigo.class);
         
-        if(enemigo!=null && enemigo.getVivo()){
+        if(enemigo!=null && enemigo.getVivo()) {
             Greenfoot.playSound("muerte.mp3");
             getWorld().removeObject(this);
             enemigo.setVivo(false);

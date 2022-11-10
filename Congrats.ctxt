@@ -1,5 +1,9 @@
 #BlueJ class context
 comment0.target=Congrats
-comment1.params=
-comment1.target=Congrats()
-numComments=2
+comment1.params=mapa\ tiempo
+comment1.target=Congrats(Mapa,\ Tiempo)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ colocarTiempo()
+numComments=4

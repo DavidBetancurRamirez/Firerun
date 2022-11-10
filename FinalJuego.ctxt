@@ -1,7 +1,11 @@
 #BlueJ class context
 comment0.target=FinalJuego
-comment1.params=ancho\ alto\ escala
-comment1.target=FinalJuego(int,\ int,\ int)
-comment2.params=posicionY
-comment2.target=void\ crearBotones(int)
-numComments=3
+comment1.params=mapa
+comment1.target=FinalJuego(Mapa)
+comment2.params=posicionX\ posicionY
+comment2.target=void\ crearBotones(int[],\ int[])
+comment3.params=
+comment3.target=void\ reintentarNivel()
+comment4.params=
+comment4.target=Mapa\ getMapa()
+numComments=5

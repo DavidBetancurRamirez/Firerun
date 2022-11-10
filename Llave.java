@@ -17,8 +17,11 @@ public class Llave extends Objeto
             Mapa mapa = (Mapa)getWorld();            
             Jugador jugador = (Jugador)getIntersectingObjects(Jugador.class).get(0);
             
+            String texto = "Parece que el ultimo codigo\nno esta ordenado.\n¿Cual orden será?";
+            mapa.pause();
+            mapa.addObject(new Mensaje(texto),500,300);
             jugador.setPortaLlave();
-            mapa.setMensaje("El ultimo codigo es el de\nla puerta 6, pero...\n¿en cual orden?");
+            mapa.setMensaje(texto);
             mapa.removeObject(this);
         }
     }

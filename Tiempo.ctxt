@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Tiempo
-comment1.params=texto\ tama\u00F1o\ tiempoEntreLava\ tiempoInicial\ aumentar
-comment1.target=Tiempo(java.lang.String,\ int,\ int,\ long,\ boolean)
+comment1.params=texto\ tama\u00F1o\ colorLetra\ tiempoEntreLava\ tiempoInicial\ aumentar
+comment1.target=Tiempo(java.lang.String,\ int,\ greenfoot.Color,\ int,\ long,\ boolean)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=tiempo
@@ -14,4 +14,6 @@ comment6.params=segundos
 comment6.target=void\ setSegundos(int)
 comment7.params=
 comment7.target=int\ getSegundosTotales()
-numComments=8
+comment8.params=
+comment8.target=int\ getMinutos()
+numComments=9

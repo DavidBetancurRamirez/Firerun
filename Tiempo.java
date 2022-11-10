@@ -1,17 +1,17 @@
 import greenfoot.*;
 
-public class Tiempo extends Texto1
+public class Tiempo extends Texto
 {
-    private int segundos, minutos, segundosTotales;
-    private int tiempoEntreLava = 30;
-    private int ultimoSegundo, duracionMilise, duracionSe, tiempoPausado, tiempoParaLava;
+    private int segundos, minutos, segundosTotales, ultimoSegundo=0;
+    private int tiempoEntreLava;
+    private int duracionMilise, duracionSe, tiempoPausado, tiempoParaLava;
     private int[] tiempoPrePause = new int[3]; // [minutos,segundos,tiempoParaLava]
     private long tiempoInicial, tiempoTranscurrido;
     private boolean aumentar,pausado;
     private boolean bandera = true;
     
-    public Tiempo(String texto, int tamaño, int tiempoEntreLava, long tiempoInicial, boolean aumentar) {
-        super(texto,tamaño);
+    public Tiempo(String texto, int tamaño, Color colorLetra, int tiempoEntreLava, long tiempoInicial, boolean aumentar) {
+        super(texto,tamaño,colorLetra);
         this.tiempoEntreLava = tiempoEntreLava;
         this.tiempoInicial = tiempoInicial;
         this.tiempoTranscurrido = tiempoInicial;
@@ -58,7 +58,10 @@ public class Tiempo extends Texto1
             }
         }
         
-        segundosTotales = segundos*(minutos+1);
+        if (ultimoSegundo != segundos+(60*minutos)) {
+            segundosTotales++;
+            ultimoSegundo = segundos+(60*minutos);
+        }
 
         setTexto(String.format("%02d", minutos)+":"+String.format("%02d", segundos));
     }
@@ -98,5 +101,9 @@ public class Tiempo extends Texto1
     
     public int getSegundosTotales() {
         return this.segundosTotales;
+    }
+    
+    public int getMinutos() {
+        return this.minutos;
     }
 }

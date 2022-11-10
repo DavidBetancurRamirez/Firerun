@@ -4,95 +4,100 @@ import java.util.ArrayList;
 public class Mapa extends World
 {
     protected long tiempoInicial;
-    protected int tiempoEntreLava = 30;
-    protected int[] size = {20,25,16,14}; // [numPuerta,info,codigo,mensaje]
-    protected boolean lava=true, hayUltimaPista, pause;
-    protected boolean canFire = true;
+    protected int tiempoEntreLava;
+    protected int[] size = {20,25,17,14}; // [numPuerta,info,codigo,mensaje]
+    protected int[] coordenadasMunicion = new int[2];
+    protected int[] coordenadasLlave = new int[2];
+    protected int[] municionInicial = new int[2];
+    protected boolean pause;
+    protected boolean hayUltimaPista = false;
+    protected boolean buscandoLlave = false;
+    protected boolean lava=true;
+    protected boolean mapaAgrietado=false;
     
+    protected Caja cajaX;
     protected Pause ventanaPause;
     protected Tiempo cronometro, tiempoLava;
-    protected Texto2 mensaje = new Texto2("Crees poder llegar al trofeo...\n sin quemarte",size[3]);
+    protected Texto mensaje = new Texto("Crees poder llegar al trofeo...\n sin quemarte",size[3],Color.BLACK);
     
     protected ArrayList<GreenfootImage> mapaFondo = new ArrayList<GreenfootImage>(); // [normal, lava]
-    protected ArrayList<Codigo> codigos = new ArrayList<Codigo>();
-    protected ArrayList<Texto1> informacion = new ArrayList<Texto1>(); // [balas, bombas]
-    protected ArrayList<Puerta> puertas = new ArrayList<Puerta>();
-    protected ArrayList<Boton> botonesPause = new ArrayList<Boton>(); // [reintentar, volver]
     protected ArrayList<Spawn> spawns = new ArrayList<Spawn>();
+    protected ArrayList<Texto> codigos = new ArrayList<Texto>();
+    protected ArrayList<Texto> informacion = new ArrayList<Texto>(); // [balas, bombas]
+    protected ArrayList<Puerta> puertas = new ArrayList<Puerta>();
     
-    public Mapa(int ancho, int alto, int escala, GreenfootImage mapaNormal, GreenfootImage mapaLava)
+    public Mapa(int tiempoEntreLava, int cantidadBalasIniciales, int cantidadBombasIniciales, GreenfootImage mapaNormal, GreenfootImage mapaLava, GreenfootImage mapaAgrietado)
     {
-        super(ancho, alto, escala);
+        super(1000, 600, 1);
+        this.tiempoEntreLava = tiempoEntreLava;
         this.mapaFondo.add(mapaNormal);
         this.mapaFondo.add(mapaLava);
+        this.mapaFondo.add(mapaAgrietado);
+        this.municionInicial[0] = cantidadBalasIniciales;
+        this.municionInicial[1] = cantidadBombasIniciales;
+        pause(false);
         crearZonaInformacion();
         cambiarMapa();
-        pause(false);
     }
     
     public void crearZonaInformacion() {
         tiempoInicial = System.currentTimeMillis();
         
-        addObject(new Texto1("Tiempo:",size[1]), 900, 20);
-        tiempoLava = new Tiempo("Lava: "+tiempoEntreLava,size[1],tiempoEntreLava,tiempoInicial,false);
+        addObject(new Texto("Tiempo:",size[1],Color.WHITE), 900, 20);
+        tiempoLava = new Tiempo("Lava: "+tiempoEntreLava,size[1],Color.WHITE,tiempoEntreLava,tiempoInicial,false);
         tiempoLava.setSegundos(tiempoEntreLava);
         addObject(tiempoLava, 900, 170);
-        cronometro = new Tiempo("00:00",size[1],tiempoEntreLava,tiempoInicial,true);
+        cronometro = new Tiempo("00:00",size[1],Color.WHITE,tiempoEntreLava,tiempoInicial,true);
         addObject(cronometro, 900, 50);
         
-        addObject(new Texto1("Codigos",size[1]), 900, 220);
+        informacion.add(new Texto("Balas:",size[1],Color.WHITE,String.valueOf(municionInicial[0]),false));
+        addObject(informacion.get(0), 900, 90);
+        informacion.add(new Texto("Bombas:",size[1],Color.WHITE,String.valueOf(municionInicial[1]),false));
+        addObject(informacion.get(1), 900, 130);
         
-        addObject(new Texto1("Mensaje",size[1]), 900, 420);
+        addObject(new Texto("Codigos",size[1],Color.WHITE), 900, 220);
+        
+        addObject(new Texto("Mensaje",size[1],Color.WHITE), 900, 420);
         addObject(this.mensaje, 900, 465);
+    }
+    
+    public void crearCodigos(int inicio) {
+        for (int i=0; i<puertas.size(); i++) {
+            codigos.add(new Texto("Codigo puerta"+(i+1)+":",size[2], Color.BLACK, "??", true));
+            addObject(codigos.get(i), 900, inicio);
+            inicio+=30;
+        }
     }
     
     public void cambiarMapa() {
         if (lava) {
             Muro.fuego = false;
             Puerta.fuego = false;
-            cambiarInformacion(1);
             setBackground(mapaFondo.get(0));
         } else {
             Muro.fuego = true;
             Puerta.fuego = true;
-            cambiarInformacion(2);
             setBackground(mapaFondo.get(1));
         }
         lava=!lava;
+        mapaAgrietado = false;
     }
     
-    public void cambiarInformacion(int opcion) {
-        // Opcion 1: Cambiar colores de mapa-normal
-        // Opcion 2: Cambiar colores de mapa-lava
-        if (opcion == 1) {
-            Texto1.color2 = new Color(135,161,171);
-            Texto2.color2 = new Color(102,111,136);
-            for (int i=0;i<codigos.size();i++) {
-                codigos.get(i).setColor2(new Color(102,111,136));
-            }
-        } else if (opcion == 2) {
-            Texto1.color2 = new Color(250,99,81);
-            Texto2.color2 = new Color(225,68,70);
-            for (int i=0;i<codigos.size();i++) {
-                codigos.get(i).setColor2(new Color(225,68,70));
-            }
-        }
-    }
-    
-    public Puerta crearPuerta(int rotacion, int numPuerta) {
+    public void crearPuerta(int rotacion, int numPuerta, int posicionX, int posicionY) {
         Puerta puerta = new Puerta(rotacion,numPuerta);
         puertas.add(puerta);
-        return puerta;
+        addObject(puerta,posicionX,posicionY);
+        addObject(new Texto(String.valueOf(numPuerta),size[0],Color.WHITE),posicionX,posicionY);
     }
     
-    public void pause() {
+    public void pause() { // Intercalar pause
         pause = !pause;
         Enemigo.pause = !Enemigo.pause;
         Jugador.pause = !Jugador.pause;
         Arma.pause = !Arma.pause;
     }
     
-    public void pause(boolean condicion) {
+    public void pause(boolean condicion) { // Pause segun condicion
         pause = condicion;
         Enemigo.pause = condicion;
         Jugador.pause = condicion;
@@ -104,18 +109,26 @@ public class Mapa extends World
         
         if (pause) {
             ventanaPause = new Pause();
-            botonesPause.add(new Boton(2));
-            botonesPause.add(new Boton(3));
-            botonesPause.add(new Boton(4));
-            
-            addObject(ventanaPause, 500, 300);
-            addObject(botonesPause.get(0), 325, 320);
-            addObject(botonesPause.get(1), 675, 320);
-            addObject(botonesPause.get(2), 500, 410);
-        }  else {
+            addObject(ventanaPause,500,300);
+        } else {
+            ventanaPause.borrarBotones();
             removeObject(ventanaPause);
-            for (Boton boton : botonesPause) removeObject(boton);
-            botonesPause.clear();
+        }
+    }
+    
+    public void buscarLlave(int x, int y) {
+        if (x>=(coordenadasMunicion[0]-15) && x<=(coordenadasMunicion[0]+15) 
+            && y>=(coordenadasMunicion[1]-15) && y<=(coordenadasMunicion[1]+15)) {
+            addObject(new Llave(),coordenadasLlave[0],coordenadasLlave[1]);
+            buscandoLlave = false;
+        }
+    }
+    
+    public void agrietarMapa() {
+        if (!mapaAgrietado) {
+            setBackground(mapaFondo.get(2));
+            Greenfoot.playSound("sonido-lava-v2.mp3");
+            mapaAgrietado = true;
         }
     }
     
@@ -141,7 +154,14 @@ public class Mapa extends World
         this.hayUltimaPista = !hayUltimaPista;
     }
     
-    public Texto2 getMensaje() {
+    public boolean isBuscandoLlave() {
+        return this.buscandoLlave;
+    }
+    public void setBuscandoLlave(boolean buscar) {
+        this.buscandoLlave = buscar;
+    }
+    
+    public Texto getMensaje() {
         return this.mensaje;
     }
     public void setMensaje(String mensaje) {
@@ -152,14 +172,18 @@ public class Mapa extends World
         return this.puertas.get(puerta-1);
     }
     
-    public Codigo getCodigo(int puerta) {
+    public int cantidadPuertas() {
+        return this.puertas.size();
+    }
+    
+    public Texto getCodigo(int puerta) {
         return this.codigos.get(puerta-1);
     }
     public void setCodigo(String codigo, int puerta) {
         this.codigos.get(puerta-1).setCodigo(codigo, puerta);
     }
     
-    public Texto1 getInformacion(int index) {
+    public Texto getInformacion(int index) {
         return this.informacion.get(index);
     }
     public void setInformacion(int informacion, int index) {
@@ -172,5 +196,13 @@ public class Mapa extends World
     
     public Spawn getSpawn(int indice) {
         return this.spawns.get(indice);
+    }
+    
+    public Caja getCajaX() {
+        return this.cajaX;
+    }
+    
+    public int[] getMunicionInicial() {
+        return this.municionInicial;
     }
 }

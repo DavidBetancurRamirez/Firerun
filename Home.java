@@ -9,7 +9,7 @@ public class Home extends World
     }
     
     public void crearBotones() {
-        addObject(new Boton(0),500,350);
-        addObject(new Boton(1),500,500);
+        addObject(new Boton(0),217,352);
+        addObject(new Boton(1),317,490);
     }
 }

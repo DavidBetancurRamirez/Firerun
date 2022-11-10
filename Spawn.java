@@ -11,11 +11,6 @@ public class Spawn extends Actor
         this.posicionY = posicionY;
     }
     
-    public void act()
-    {
-        
-    }
-    
     public int getPosicionX() {
         return this.posicionX;
     }

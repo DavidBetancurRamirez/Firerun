@@ -1,11 +1,15 @@
 import greenfoot.*;
 
 public class GameOver extends FinalJuego
-{
-    public GameOver()
+{    
+    public GameOver(Mapa mapa)
     {
-        super(1000, 600, 1); 
-        Greenfoot.playSound("GameOverSound.mp3");
-        crearBotones(520);
+        super(mapa);
+        int[] posicion;
+        crearBotones(posicion=new int[]{325,675},posicion=new int[]{520,520});
+    }
+    
+    public void act() {
+        reintentarNivel();
     }
 }

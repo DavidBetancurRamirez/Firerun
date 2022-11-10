@@ -2,12 +2,7 @@ import greenfoot.*;
 import java.util.List;
 
 public class Jugador1 extends Jugador
-{
-    private Mapa mapa;
-    private int velocidad = 2;
-    private boolean[] canFire = new boolean[4]; // [e,q,p,espace]
-    private int direccionDisparo=2;
-    
+{    
     private GifImage gifArriba = new GifImage("personaje-arriba-v3.gif");
     private GifImage gifDerecha = new GifImage("personaje-derecha-v3.gif");
     private GifImage gifAbajo = new GifImage("personaje-abajo-v3.gif");
@@ -15,12 +10,12 @@ public class Jugador1 extends Jugador
     
     public void act() 
     {        
+        mapa = (Mapa)getWorld();
         if (!pause) {
-            mapa = (Mapa)getWorld();
             moverse();
             
             if (mapa.isLava()) lava();
-            if (!buscandoLlave && mapa.isHayUltimaPista()) buscandoLlave = true;
+            if (mapa.isHayUltimaPista() && mapa.buscandoLlave) mapa.buscarLlave(getX(),getY());
         }
         
         acciones();
@@ -51,7 +46,7 @@ public class Jugador1 extends Jugador
     }
     
     public void acciones() {        
-        if (Greenfoot.isKeyDown("e") && canFire[0] && !getIntersectingObjects(Objeto.class).isEmpty()) { // Acciones varias
+        if (Greenfoot.isKeyDown("m") && canFire[0] && !getIntersectingObjects(Objeto.class).isEmpty()) { // Acciones varias
             if (getIntersectingObjects(Caja.class).size() > 0) { // Abrir caja
                 Caja caja = (Caja)getIntersectingObjects(Caja.class).get(0);                
                 caja.accion(mapa);
@@ -67,17 +62,17 @@ public class Jugador1 extends Jugador
                 municion.obtenerMunicion(mapa);
             }
             canFire[0] = false;
-        } else if (!Greenfoot.isKeyDown("q")) {
+        } else if (!Greenfoot.isKeyDown("m")) {
             canFire[0] = true;
         }
         
-        if (Greenfoot.isKeyDown("q") && canFire[1]) { // Colocar bomba
+        if (Greenfoot.isKeyDown("n") && canFire[1]) { // Colocar bomba
             if (Integer.parseInt(mapa.getInformacion(1).getExtra()) > 0) {
-                mapa.addObject(new Bomba(), getX(), getY());
+                mapa.addObject(new Mina(), getX(), getY());
                 mapa.setInformacion(Integer.parseInt(mapa.getInformacion(1).getExtra())-1,1);
             }
             canFire[1] = false;
-        } else if (!Greenfoot.isKeyDown("q")) {
+        } else if (!Greenfoot.isKeyDown("n")) {
             canFire[1] = true;
         }
         
@@ -106,7 +101,7 @@ public class Jugador1 extends Jugador
     
     public void lava() {
         if (!mapa.getColorAt(getX(),getY()).equals(new Color(239, 184, 16))) {
-            Greenfoot.setWorld(new GameOver());
+            Greenfoot.setWorld(new GameOver(mapa));
         }
     }
     
@@ -114,14 +109,6 @@ public class Jugador1 extends Jugador
         int oldX = getX();
         int oldY = getY();
         super.setLocation(x, y);
-        
-        // Buscando la llave
-        if (buscandoLlave) {
-            if (x>=40 && x<=60 && y>=340 && y<=360) {
-                mapa.addObject(new Llave(),350,350);
-                buscandoLlave = false;
-            }
-        }
         
         // Colision con limites del mapa
         if(x >= 775 || x<=25 || y<=25 || y>=575) {
