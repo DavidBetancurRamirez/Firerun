@@ -36,7 +36,7 @@ public class Tiempo extends Texto
             if(aumentar) {
                 duracionMilise = (int)(tiempoTranscurrido - tiempoInicial);
                 duracionSe = duracionMilise / 1000;
-                this.aumentarTiempo(duracionSe+(tiempoPrePause[1]*(tiempoPrePause[0]+1)));
+                this.aumentarTiempo(duracionSe+(tiempoPrePause[1]+(tiempoPrePause[0]*60)));
             } else {
                 duracionMilise = (int)(tiempoInicial - tiempoTranscurrido);
                 duracionSe = duracionMilise / 1000;
@@ -48,8 +48,8 @@ public class Tiempo extends Texto
     public void aumentarTiempo(int tiempo) {
         segundos = tiempo;
         
-        while(segundos!=0 && segundos>=59) {
-            segundos-=59;
+        while(segundos!=0 && segundos>59) {
+            segundos-=60;
             if (segundos==1) bandera=true;
             if(segundos==0 && bandera) {
                 minutos++; 
